@@ -19,7 +19,7 @@ CREATE TABLE Visto (
    usuario VARCHAR2(20),
    data DATE, 
    minuto NUMBER(4),
-   CONSTRAINT pk_visto PRIMARY KEY(midiaLicenciada),
+   CONSTRAINT pk_visto PRIMARY KEY(midiaLicenciada, usuario, data),
    CONSTRAINT fk_visto1 FOREIGN KEY(midiaLicenciada) REFERENCES MidiaLicenciada(id),
    CONSTRAINT fk_visto2 FOREIGN KEY(usuario) REFERENCES Usuario(nome),
    CONSTRAINT ck_minuto CHECK(minuto>0 and minuto<1200)

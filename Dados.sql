@@ -1,4 +1,15 @@
+INSERT INTO Usuario (email, nome, senha) VALUES ('victor@lutes.com', 'victor lutes', 'senha');
+INSERT INTO Usuario (email, nome, senha) VALUES ('victor@lutes.com', 'victor lutes', 'senha');
+INSERT INTO Usuario (email, nome, senha) VALUES ('victor@lutes.com', 'victor lutes', 'senha');
 
+INSERT INTO MarcaParaAssistir (usuario, midia) VALUES ('victor@lutes.com', 1);
+INSERT INTO MarcaParaAssistir (usuario, midia) VALUES ('victor@lutes.com', 2);
+INSERT INTO MarcaParaAssistir (usuario, midia) VALUES ('victor@lutes.com', 3);
+INSERT INTO MarcaParaAssistir (usuario, midia) VALUES ('victor@lutes.com', 4);
+
+INSERT INTO Visto (midiaLicenciada,usuario, data, minuto) VALUES (1, 'victor@lutes.com', TO_DATE('2022/04/30 16:00:00', 'YYYY/MM/DD HH24:MI:SS'), 100);
+INSERT INTO Visto (midiaLicenciada,usuario, data, minuto) VALUES (2, 'victor@lutes.com', TO_DATE('2022/04/30 19:00:00', 'YYYY/MM/DD HH24:MI:SS'), 100);
+INSERT INTO Visto (midiaLicenciada,usuario, data, minuto) VALUES (3, 'victor@lutes.com', TO_DATE('2022/05/02 16:00:00', 'YYYY/MM/DD HH24:MI:SS'), 100);
 
 /*
 INSERT INTO TIME (NOME, ESTADO, TIPO, SALDO_GOLS) VALUES ('PALMEIRAS', 'SP', 'PROFISSIONAL', 0);
