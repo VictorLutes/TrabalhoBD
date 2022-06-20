@@ -31,6 +31,7 @@ varLinguagem="PORTUGUES";
 SELECT M.nome, M.diretor FROM
     Midia M JOIN DubLegEpisodio D ON D.serie=M.id WHERE D.linguagem=varLinguagem
     UNION
+SELECT M.nome, M.diretor FROM
     Midia M JOIN DubLegFilme D ON D.filme=M.id WHERE D.linguagem=varLinguagem;
 
 buscar filmes e series com um ator:
@@ -38,6 +39,7 @@ varNomeAtor="JOHN HAMM";
 SELECT M.nome, M.diretor FROM
     Midia M JOIN ElencoEpisodio E ON E.serie=M.id WHERE E.nome=varNome
     UNION
+SELECT M.nome, M.diretor FROM
     Midia M JOIN ElencoFilme E ON E.filme=M.id WHERE E.nome=varNomeAtor;
 
 
