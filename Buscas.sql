@@ -55,6 +55,16 @@ varPais;
 varNomeMidia;
 varNomeDiretor;
 SELECT S.nome, FROM Streaming S JOIN MidiaLicenciada ML ON S.nome=ML.streaming JOIN Midia M ON M.id=ML.midia WHERE ML.pais=varPais AND M.titulo=varNomeMidia AND M.diretor=varNomeDiretor;
+
+
+selecionar streaming que possui a mídia buscada pelo usuário:
+
+SELECT str.nome FROM Streaming str
+INNER JOIN MidiaLicenciada ML ON str.nome = ML.streaming
+INNER JOIN Midia M ON M.id = ML.midia
+WHERE M.tituloEstrangeiro = 'tituloBuscado';
+
+
 /*
 ----- Dicion�rio de Dados -------------------
 
