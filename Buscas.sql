@@ -47,6 +47,12 @@ SELECT S.nome, count(MPA.midia) FROM Streaming S JOIN MidiaLicenciada ML ON S.no
 GROUP BY S.nome HAVING count(MPA.midia)>0
 ORDER BY count(MPA.midia) DESC;
 
+
+selecionar todas as plataformas que tem um filme num determinado pais:
+varPais;
+varNomeMidia;
+varNomeDiretor;
+SELECT S.nome, FROM Streaming S JOIN MidiaLicenciada ML ON S.nome=ML.streaming JOIN Midia M ON M.id=ML.midia WHERE ML.pais=varPais AND M.titulo=varNomeMidia AND M.diretor=varNomeDiretor;
 /*
 ----- Dicion�rio de Dados -------------------
 
