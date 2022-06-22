@@ -43,7 +43,7 @@ INSERT INTO Midia (id, titulo, diretor, data, descricao, tituloEstrangeiro, tipo
 INSERT INTO Midia (id, titulo, diretor, data, descricao, tituloEstrangeiro, tipo) VALUES (3, 'IN THE MOOD FOR LOVE', 'WONG KAR WAI', TO_DATE('2016/05/02 16:00:00', 'YYYY/MM/DD HH24:MI:SS'), 'MUITO BOM E TRISTE', 'AMOR A FLOR DA PELE', 'FILME');
 INSERT INTO Midia (id, titulo, diretor, data, descricao, tituloEstrangeiro, tipo) VALUES (4, 'DR WHO', 'STEVEN MOFFAT', TO_DATE('2016/05/02 16:00:00', 'YYYY/MM/DD HH24:MI:SS'), 'MUITO BOM E SCIFI', 'DR WHO', 'SERIE');
 INSERT INTO Midia (id, titulo, diretor, data, descricao, tituloEstrangeiro, tipo) VALUES (5, 'LETTERKENNY', 'JARED KEESO', TO_DATE('2016/05/02 16:00:00', 'YYYY/MM/DD HH24:MI:SS'), 'MUITO BOM E ENGRACADO', 'LETTERKENNY', 'SERIE');
-INSERT INTO Midia (id, titulo, diretor, data, descricao, tituloEstrangeiro, tipo) VALUES (6, 'ITS ALWAYS SUNNY IN PHILADELPHIA', 'ROB MCELHENNEY', TO_DATE('2016/05/02 16:00:00', 'YYYY/MM/DD HH24:MI:SS'), 'MUITO BOM E ENGRACADO', 'IASIP', 'SERIE');
+INSERT INTO Midia (id, titulo, diretor, data, descricao, tituloEstrangeiro, tipo) VALUES (6, 'ALWAYS SUNNY IN PHILADELPHIA', 'ROB MCELHENNEY', TO_DATE('2016/05/02 16:00:00', 'YYYY/MM/DD HH24:MI:SS'), 'MUITO BOM E ENGRACADO', 'IASIP', 'SERIE');
 
 INSERT INTO MidiaLicenciada (id, midia, streaming, pais) VALUES (1, 1, 'NETFLIX', 'BRASIL');
 INSERT INTO MidiaLicenciada (id, midia, streaming, pais) VALUES (2, 1, 'NETFLIX', 'ESTADOS UNIDOS');
