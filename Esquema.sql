@@ -44,7 +44,8 @@ CREATE TABLE Assina (
    usuario VARCHAR2(30),
    streaming VARCHAR2(30),
    CONSTRAINT pk_assina PRIMARY KEY(usuario, streaming),
-   CONSTRAINT fk_assina FOREIGN KEY(streaming) REFERENCES Streaming(nome)
+   CONSTRAINT fk_assina FOREIGN KEY(streaming) REFERENCES Streaming(nome),
+   CONSTRAINT fk_assina2 FOREIGN KEY(usuario) REFERENCES Usuario(email)
 );
 
 CREATE TABLE Determina (
