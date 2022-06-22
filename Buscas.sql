@@ -23,21 +23,23 @@ Buscar qual usuario mais assistiu algum genero/plataforma/nroMidias
 
 /*Filtrar por genero:
 varGenero="DRAMA";*/
-SELECT M.nome, M.diretor FROM
+SELECT M.titulo, M.diretor FROM
     Midia M JOIN Genero G ON G.midia=M.id WHERE G.nomeGenero=varGenero;
     
 /*filtrar por linguagem:
 varLinguagem="PORTUGUES";*/
-SELECT M.nome, M.diretor FROM
+SELECT M.titulo, M.diretor FROM
     Midia M JOIN DubLegEpisodio D ON D.serie=M.id WHERE D.linguagem=varLinguagem
     UNION
+SELECT M.titulo, M.diretor FROM
     Midia M JOIN DubLegFilme D ON D.filme=M.id WHERE D.linguagem=varLinguagem;
 
 /*buscar filmes e series com um ator:
 varNomeAtor="JOHN HAMM";*/
-SELECT M.nome, M.diretor FROM
+SELECT M.titulo, M.diretor FROM
     Midia M JOIN ElencoEpisodio E ON E.serie=M.id WHERE E.nome=varNome
     UNION
+SELECT M.titulo, M.diretor FROM
     Midia M JOIN ElencoFilme E ON E.filme=M.id WHERE E.nome=varNomeAtor;
 
 
