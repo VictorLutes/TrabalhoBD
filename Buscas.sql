@@ -57,7 +57,7 @@ SELECT S.nome, count(MPA.midia) FROM Streaming S
 varPais;
 varNomeMidia;
 varNomeDiretor;*/
-SELECT S.nome, FROM Streaming S 
+SELECT S.nome FROM Streaming S 
     JOIN MidiaLicenciada ML ON S.nome=ML.streaming 
     JOIN Midia M ON M.id=ML.midia 
     WHERE ML.pais=varPais AND M.titulo=varNomeMidia AND M.diretor=varNomeDiretor;
