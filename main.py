@@ -7,7 +7,53 @@ cur = conn.cursor()
 
 
 def inserir():
-    print("Tabelas: ")
+    print("Tabelas: 1-VPN, 2-Streaming, 3-Pais, 4-Usuario, 5-EstaEm, 6-Utiliza, 7-Assina, 7-Determina, 9-Midia, 10-Photo, \
+        11-Genero, 12-MidiaLicenciada,  13-MarcaParaAssistir, 14-Visto, 15-Filme, 16-ElencoFilme, 17-DubLegFilme, \
+        19-Serie, 20-Episodio, 21-ElencoEpisodio, 22-DubLegEpisodio")
+    tabela=input("digite o numero da tabela que voce quer inserir: ")
+    if(tabela==1):
+        nome=input("digite o nome da VPN: ")
+        preco=input("digite o preco da VPN: ")
+
+    elif(tabela==2):
+        nome=input("digite o nome da Plataforma de Streaming: ")
+        preco=input("digite o preco da Plataforma de Streaming: ")
+
+    elif(tabela==3):
+        nome=input("digite o nome do pais: ")
+
+    elif(tabela==4):
+        email=input("digite o email da Usuario: ")
+        nome=input("digite o nome da Usuario: ")
+        senha=input("digite o senha da Usuario: ")
+
+    elif(tabela==5):
+        usuario=input("digite o usuario da EstaEm: ")
+        pais=input("digite o pais da EstaEm: ")
+
+    elif(tabela==6):
+        usuario=input("digite o usuario da Utiliza: ")
+        vpn=input("digite a vpn da Utiliza: ")
+
+    elif(tabela==7):
+        usuario=input("digite o usuario da EstaEm: ")
+        pais=input("digite o pais da EstaEm: ")
+        
+    elif(tabela==8):
+    elif(tabela==9):
+    elif(tabela==10):
+    elif(tabela==11):
+    elif(tabela==12):
+    elif(tabela==13):
+    elif(tabela==14):
+    elif(tabela==15):
+    elif(tabela==16):
+    elif(tabela==17):
+    elif(tabela==18):
+    elif(tabela==19):
+    elif(tabela==20):
+    elif(tabela==21):
+    elif(tabela==22):
 
 def buscar():
     print("Digite o email de um usuario para saber qual plataforma tem mais midias que ele marcou para assistir")
