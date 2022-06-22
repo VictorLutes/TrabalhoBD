@@ -37,7 +37,7 @@ SELECT M.titulo, M.diretor FROM
 /*buscar filmes e series com um ator:
 varNomeAtor="JOHN HAMM";*/
 SELECT M.titulo, M.diretor FROM
-    Midia M JOIN ElencoEpisodio E ON E.serie=M.id WHERE E.nome=varNome
+    Midia M JOIN ElencoEpisodio E ON E.serie=M.id WHERE E.nome=varNomeAtor
     UNION
 SELECT M.titulo, M.diretor FROM
     Midia M JOIN ElencoFilme E ON E.filme=M.id WHERE E.nome=varNomeAtor;
