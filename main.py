@@ -1,9 +1,9 @@
 #ler usuario, fazer uma busca ou insercao, retornar dados
 import cx_Oracle
-import db_config
-con = cx_Oracle.connect(db_config.user, db_config.pw, db_config.dsn)
+dsn_tns = cx_Oracle.makedsn('Host Name', 'Port Number', service_name='Service Name') # if needed, place an 'r' before any parameter in order to address special characters such as '\'.
+conn = cx_Oracle.connect(user=r'User Name', password='Personal Password', dsn=dsn_tns) # if needed, place an 'r' before any parameter in order to address special characters such as '\'. For example, if your user name contains '\', you'll need to place 'r' before the user name: user=r'User Name'
 
-cur = con.cursor()
+c = conn.cursor()
 
 
 def inserir():
@@ -38,3 +38,5 @@ while(option!=0):
         inserir()
     elif(option==2):
         buscar()
+
+conn.close()
