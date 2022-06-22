@@ -66,3 +66,9 @@ SELECT str.nome FROM Streaming str
     INNER JOIN MidiaLicenciada ML ON str.nome = ML.streaming
     INNER JOIN Midia M ON M.id = ML.midia
     WHERE M.tituloEstrangeiro = 'tituloBuscado';
+    
+/*Mostrar os usuários com mais shows assistidos:*/
+SELECT usuario, COUNT(midiaLicenciada) as nroMidia 
+    FROM Visto 
+    GROUP BY usuario
+    ORDER BY nroMidia DESC;
