@@ -128,6 +128,30 @@ def buscarMidia():
     for row in res:
         print(row)
 
+def buscarVPNs():
+    sql="SELECT * FROM VPN;"
+    try:
+        cur.execute(sql)
+    except(Exception, psycopg2.DatabaseError) as error:
+        print(error)
+        print("select failed")
+        return
+    res = cur.fetchall()
+    for row in res:
+        print(row)
+
+def buscarMidias():
+    sql="SELECT * FROM Midia;"
+    try:
+        cur.execute(sql)
+    except(Exception, psycopg2.DatabaseError) as error:
+        print(error)
+        print("select failed")
+        return
+    res = cur.fetchall()
+    for row in res:
+        print(row)
+
 def usarScripts():
     cur.execute("SELECT table_schema,table_name FROM information_schema.tables WHERE table_schema = 'public' ORDER BY table_schema,table_name")
     rows = cur.fetchall()
@@ -142,7 +166,7 @@ def usarScripts():
 option=1
 
 while(option!=0):
-    print("Opcoes: \n\t0-sair\n\t1-inserir\n\t2-buscar pela plataforma com mais filmes ou series marcadas\n\t3-buscar quais plataformas tem um filme ou serie em um pais\n\t4-apagar todas as tabelas e recarregar o esquema e os dados dos arquivos sql")
+    print("Opcoes: \n\t0-sair\n\t1-inserir\n\t2-buscar pela plataforma com mais filmes ou series marcadas\n\t3-buscar quais plataformas tem um filme ou serie em um pais\n\t4-listar todas as VPNs\n\t5-listar todas as midias\n\t6-apagar todas as tabelas e recarregar o esquema e os dados dos arquivos sql")
     option=int(input("Escolha uma opcao: "))
     if(option==1):
         inserir()
@@ -151,6 +175,10 @@ while(option!=0):
     elif(option==3):
         buscarMidia()
     elif(option==4):
+        buscarVPNs()
+    elif(option==5):
+        buscarMidias()
+    elif(option==6):
         usarScripts()
 
 conn.close()
