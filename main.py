@@ -166,10 +166,10 @@ def usarScripts():
 option=1
 
 while(option!=0):
-    print("Opcoes: \n\t0-sair\n\t1-inserir\n\t2-buscar pela plataforma com mais filmes ou series marcadas\n\t3-buscar quais plataformas tem um filme ou serie em um pais\n\t4-listar todas as VPNs\n\t5-listar todas as midias\n\t6-apagar todas as tabelas e recarregar o esquema e os dados dos arquivos sql")
+    print("Opcoes: \n\t0-sair\n\t1-apagar todas as tabelas e recarregar o esquema e os dados dos arquivos sql\n\t2-buscar pela plataforma com mais filmes ou series marcadas para assistir de um usuario\n\t3-buscar quais plataformas tem um filme ou serie em um pais\n\t4-listar todas as VPNs\n\t5-listar todas as midias\n\t6-inserir dados em uma tabela")
     option=int(input("Escolha uma opcao: "))
     if(option==1):
-        inserir()
+        usarScripts()
     elif(option==2):
         buscarMarcados()
     elif(option==3):
@@ -179,7 +179,7 @@ while(option!=0):
     elif(option==5):
         buscarMidias()
     elif(option==6):
-        usarScripts()
+        inserir()
 
 conn.close()
 print('Database connection closed.')
