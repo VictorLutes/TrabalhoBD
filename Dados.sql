@@ -55,6 +55,7 @@ INSERT INTO MidiaLicenciada (id, midia, streaming, pais) VALUES (7, 3, 'NETFLIX'
 INSERT INTO MidiaLicenciada (id, midia, streaming, pais) VALUES (8, 2, 'HULU', 'BRASIL');
 INSERT INTO MidiaLicenciada (id, midia, streaming, pais) VALUES (9, 4, 'HBO', 'BRASIL');
 INSERT INTO MidiaLicenciada (id, midia, streaming, pais) VALUES (10, 5, 'STREMIO', 'BRASIL');
+INSERT INTO MidiaLicenciada (id, midia, streaming, pais) VALUES (11, 6, 'STREMIO', 'BRASIL');
 
 
 INSERT INTO Visto (midiaLicenciada,usuario, data, minuto) VALUES (5, 'victor@lutes.com', TO_DATE('2022/04/30 16:00:00', 'YYYY/MM/DD HH24:MI:SS'), 100);
