@@ -57,7 +57,7 @@ CREATE TABLE Determina (
 );
 
 CREATE TABLE Midia (
-   id SERIAL,
+   id SERIAL,--usamos serial para o id ser inserido automaticamente
    titulo VARCHAR(30) NOT NULL,
    diretor VARCHAR(30) NOT NULL,
    data DATE, 
@@ -84,7 +84,7 @@ CREATE TABLE Genero (
 );
 
 CREATE TABLE MidiaLicenciada (
-   id SERIAL,
+   id SERIAL,--usamos serial para o id ser inserido automaticamente
    midia INTEGER NOT NULL,
    streaming VARCHAR(30) NOT NULL,
    pais VARCHAR(30) NOT NULL,

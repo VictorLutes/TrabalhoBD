@@ -130,6 +130,7 @@ def inserir():
 def buscarMarcados():
     print("Digite o email de um usuario para saber quantas midias que ele marcou para assistir tem em cada plataforma (se houver pelo menos uma)")
     email=input("digite um email: ")
+    #estou selecionando o nome da streaming e o numero de midias licenciadas que ela tem que contem alguma midia que o usuario passado marcou para assistir
     sql="SELECT S.nome, count(MPA.midia) FROM Streaming S JOIN MidiaLicenciada ML ON S.nome=ML.streaming JOIN MarcaParaAssistir MPA ON MPA.midia=ML.midia WHERE MPA.usuario = %s GROUP BY S.nome HAVING count(MPA.midia)>0 ORDER BY count(MPA.midia) DESC;"
     try:
         cur.execute(sql, [email])
@@ -138,8 +139,9 @@ def buscarMarcados():
         print("select failed")
         return
     res = cur.fetchall()
-    print("Nome das streamings e numero de midias que elas tem em algum pais que o usuario %s marcou para assitir: ", email)
+    print("Nome das streamings e numero de midias que elas tem em algum pais que o usuario "+email+" marcou para assitir: ")
     for row in res:
+        print("\t", end='')
         print(row)
 
 #fazer a busca do nome das plataformas com uma midia em um pais
@@ -148,6 +150,7 @@ def buscarMidia():
     pais=input("digite o pais: ")
     nome=input("digite o nome: ")
     diretor=input("digite o nome do diretor: ")
+    #estou selecionando o nome das Streamings que tem uma midia licenciada do filme com o nome e diretor passado pelo usuario no pais passado pelo usuario
     sql="SELECT S.nome FROM Streaming S JOIN MidiaLicenciada ML ON S.nome=ML.streaming JOIN Midia M ON M.id=ML.midia WHERE ML.pais=%s AND M.titulo=%s AND M.diretor=%s;"
     try:
         cur.execute(sql, [pais.upper(), nome.upper(), diretor.upper()])
@@ -156,12 +159,14 @@ def buscarMidia():
         print("select failed")
         return
     res = cur.fetchall()
-    print("Nome das streamings com a midia %s no %s:", nome, pais)
+    print("Nome das streamings com a midia "+nome+" no "+pais+": ")
     for row in res:
-        print(row)
+        print("\t", end='(')
+        print(row[0], end=')\n')
 
 #lista todas as vpns
 def buscarVPNs():
+    #estou selecionando todas as linhas da tabela VPN
     sql="SELECT * FROM VPN;"
     try:
         cur.execute(sql)
@@ -172,10 +177,12 @@ def buscarVPNs():
     res = cur.fetchall()
     print("Dados de VPN:")
     for row in res:
+        print("\t", end='')
         print(row)
 
 #lista todas as midias
 def buscarMidias():
+    #estou selecionando todas as linhas da tabela Midia
     sql="SELECT * FROM Midia;"
     try:
         cur.execute(sql)
@@ -186,6 +193,7 @@ def buscarMidias():
     res = cur.fetchall()
     print("Dados de Midias:")
     for row in res:
+        print("\t", end='')
         print(row)
 
 #dropa as tabelas e recria elas com os dados do esquema
