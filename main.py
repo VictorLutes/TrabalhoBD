@@ -8,20 +8,13 @@ try:
     # cria a conexao
     print('Connecting to the PostgreSQL database...')
     conn = psycopg2.connect(host='localhost', database='postgres',user='postgres', password='TrabalhoBD1234')
-    
-    # busca a versao do postgres para imprimir
-    print('PostgreSQL database version:')
     cur = conn.cursor()
-    cur.execute('SELECT version()')
 
-    # imprime a versao do postgres
-    db_version = cur.fetchone()
-    print(db_version)
-
-    
 except (Exception, psycopg2.DatabaseError) as error:
     print(error)
+    exit
 
+#funcao para inserir dados na tabela
 def inserir():
     print("Tabelas: 1-VPN, 2-Streaming, 3-Pais, 4-Usuario, 5-Midia (e Filme ou Serie)")
     #10-Photo, 11-Genero, 12-MidiaLicenciada,  13-MarcaParaAssistir, 14-Visto, 15-Filme, 16-ElencoFilme, 17-DubLegFilme, 19-Serie, 20-Episodio, 21-ElencoEpisodio, 22-DubLegEpisodio")
@@ -80,29 +73,38 @@ def inserir():
 
     elif(tabela==5):
         print("Digite os dados da mídia e depois os dados do filme ou serie correspondente")
-        ident=input("digite id da  Midia: ")
         titulo=input("digite o titulo da Midia: ")
         diretor=input("digite o diretor da Midia: ")
         data=input("digite a data da Midia (no formato YYYY/MM/DD HH24:MI:SS): ")
         descricao=input("digite a descricao da Midia: ")
         tituloEstrangeiro=input("digite o tituloEstrangeiro da Midia: ")
         tipo=input("digite o tipo da Midia (filme ou serie): ")
-        sql="INSERT INTO Midia (id, titulo, diretor, data, descricao, tituloEstrangeiro, tipo) VALUES (%s, %s, %s, TO_DATE('%s', 'YYYY/MM/DD HH24:MI:SS'), %s, %s, %s);"
+        sql="INSERT INTO Midia (titulo, diretor, data, descricao, tituloEstrangeiro, tipo) VALUES (%s, %s, TO_DATE(%s, 'YYYY/MM/DD HH24:MI:SS'), %s, %s, %s);"
         try:
-            cur.execute(sql, [int(ident), titulo.upper(), diretor.upper(), data, descricao, tituloEstrangeiro.upper(), tipo.upper()])
+            cur.execute(sql, [titulo.upper(), diretor.upper(), data, descricao, tituloEstrangeiro.upper(), tipo.upper()])
         except(Exception, psycopg2.DatabaseError) as error:
             print(error)
             print("insert failed")
             conn.rollback()
             return
-        
+        sql="SELECT id FROM Midia WHERE titulo=%s AND diretor=%s;"
+        try:
+            cur.execute(sql, [titulo.upper(), diretor.upper()])
+        except(Exception, psycopg2.DatabaseError) as error:
+            print(error)
+            print("insert failed")
+            conn.rollback()
+            return
+        res = cur.fetchall()
+        ident=res[0][0]
+        print(ident)
         if(tipo.upper()=='SERIE'):
             print("Agora insira os dados dessa Serie:")
             nroTemp=input("digite numero de temporadas da  Serie: ")
             nroEp=input("digite numero episodios por temporada da  Serie: ")
-            sql="INSERT INTO Serie (id, duracao) VALUES (%s, %s);"
+            sql="INSERT INTO Serie (id, nroTemporadas, nroEps) VALUES (%s, %s, %s);"
             try:
-                cur.execute(sql, [int(ident), int(dur)])
+                cur.execute(sql, [int(ident), int(nroTemp), int(nroEp)])
             except(Exception, psycopg2.DatabaseError) as error:
                 print(error)
                 print("insert failed")
@@ -111,7 +113,7 @@ def inserir():
         else:
             print("Agora insira os dados desse Filme:")
             dur=input("digite a duracao do Filme: ")
-            sql="INSERT INTO Serie (id, nroTemporadas, nroEps) VALUES (%s, %s, %s);"
+            sql="INSERT INTO Filme (id, duracao) VALUES (%s, %s);"
             try:
                 cur.execute(sql, [int(ident), int(dur)])
             except(Exception, psycopg2.DatabaseError) as error:
@@ -185,7 +187,7 @@ def usarScripts():
         print("dropping table: ", row[1])
         cur.execute("drop table " + row[1] + " cascade")
     cur.execute(open("EsquemaPostgre.sql", "r").read())
-    cur.execute(open("Dados.sql", "r").read())
+    cur.execute(open("DadosPostgre.sql", "r").read())
     conn.commit()
 
 

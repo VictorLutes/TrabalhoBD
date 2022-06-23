@@ -171,27 +171,3 @@ CREATE TABLE DubLegEpisodio (
    CONSTRAINT pk_dubepisodio PRIMARY KEY(serie, nroTemp, nroEp, linguagem),
    CONSTRAINT fk_dubepisodio FOREIGN KEY(serie, nroTemp, nroEp) REFERENCES Episodio(serie, nroTemp, nroEp)
 );
-
-/*drop with:
-drop table ASSINA cascade constraints;
-drop table DETERMINA cascade constraints;
-drop table DUBLEGEPISODIO cascade constraints;
-drop table DUBLEGFILME cascade constraints;
-drop table ELENCOEPISODIO cascade constraints;
-drop table ELENCOFILME cascade constraints;
-drop table EPISODIO cascade constraints;
-drop table ESTAEM cascade constraints;
-drop table FILME cascade constraints;
-drop table GENERO cascade constraints;
-drop table MARCAPARAASSISTIR cascade constraints;
-drop table MIDIA cascade constraints;
-drop table MIDIALICENCIADA cascade constraints;
-drop table PAIS cascade constraints;
-drop table PHOTO cascade constraints;
-drop table SERIE cascade constraints;
-drop table STREAMING cascade constraints;
-drop table USUARIO cascade constraints;
-drop table UTILIZA cascade constraints;
-drop table VISTO cascade constraints;
-drop table VPN cascade constraints;
-*/
