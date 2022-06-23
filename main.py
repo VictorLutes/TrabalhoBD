@@ -1,15 +1,34 @@
 #ler usuario, fazer uma busca ou insercao, retornar dados
-import cx_Oracle
-dsn_tns = cx_Oracle.makedsn('Host Name', 'Port Number', service_name='Service Name') # if needed, place an 'r' before any parameter in order to address special characters such as '\'.
-conn = cx_Oracle.connect(user=r'User Name', password='Personal Password', dsn=dsn_tns) # if needed, place an 'r' before any parameter in order to address special characters such as '\'. For example, if your user name contains '\', you'll need to place 'r' before the user name: user=r'User Name'
 
-cur = conn.cursor()
+#senha TrabalhoBD1234
 
+import psycopg2
+# conecta na base
+try:
+    # cria a conexao
+    print('Connecting to the PostgreSQL database...')
+    conn = psycopg2.connect(host='localhost', database='postgres',user='postgres', password='TrabalhoBD1234')
+    
+    
+    # busca a versao do postgres para imprimir
+    print('PostgreSQL database version:')
+    cur = conn.cursor()
+    cur.execute('SELECT version()')
+
+    # imprime a versao do postgres
+    db_version = cur.fetchone()
+    print(db_version)
+
+    cur.execute(open("EsquemaPostgre.sql", "r").read())
+    cur.execute(open("Dados.sql", "r").read())
+
+    
+except (Exception, psycopg2.DatabaseError) as error:
+    print(error)
 
 def inserir():
-    print("Tabelas: 1-VPN, 2-Streaming, 3-Pais, 4-Usuario, 5-EstaEm, 6-Utiliza, 7-Assina, 8-Determina, 9-Midia, 10-Photo, \
-        11-Genero, 12-MidiaLicenciada,  13-MarcaParaAssistir, 14-Visto, 15-Filme, 16-ElencoFilme, 17-DubLegFilme, \
-        19-Serie, 20-Episodio, 21-ElencoEpisodio, 22-DubLegEpisodio")
+    print("Tabelas: 1-VPN, 2-Streaming, 3-Pais, 4-Usuario, 5-EstaEm, 6-Utiliza, 7-Assina, 8-Determina, 9-Midia")
+    #10-Photo, 11-Genero, 12-MidiaLicenciada,  13-MarcaParaAssistir, 14-Visto, 15-Filme, 16-ElencoFilme, 17-DubLegFilme, 19-Serie, 20-Episodio, 21-ElencoEpisodio, 22-DubLegEpisodio")
     tabela=input("digite o numero da tabela que voce quer inserir: ")
     if(tabela==1):
         nome=input("digite o nome da VPN: ")
@@ -52,26 +71,18 @@ def inserir():
         tituloEstrangeiro=input("digite o tituloEstrangeiro da Midia: ")
         tipo=input("digite o tipo da Midia (filme ou serie): ")
 
-    elif(tabela==10):
-        
-    elif(tabela==11):
-    elif(tabela==12):
-    elif(tabela==13):
-    elif(tabela==14):
-    elif(tabela==15):
-    elif(tabela==16):
-    elif(tabela==17):
-    elif(tabela==18):
-    elif(tabela==19):
-    elif(tabela==20):
-    elif(tabela==21):
-    elif(tabela==22):
+    
 
 def buscar():
     print("Digite o email de um usuario para saber qual plataforma tem mais midias que ele marcou para assistir")
     email=input("digite um email: ")
-    sql="SELECT S.nome, count(MPA.midia) FROM Streaming S JOIN MidiaLicenciada ML ON S.nome=ML.streaming JOIN MarcaParaAssistir MPA ON MPA.midia=ML.midia WHERE MPA.usuario = :varUsuario GROUP BY S.nome HAVING count(MPA.midia)>0 ORDER BY count(MPA.midia) DESC;"
-    cur.execute(sql, varUsuario=email.upper())
+    sql="SELECT S.nome, count(MPA.midia) FROM Streaming S JOIN MidiaLicenciada ML ON S.nome=ML.streaming JOIN MarcaParaAssistir MPA ON MPA.midia=ML.midia WHERE MPA.usuario = %s GROUP BY S.nome HAVING count(MPA.midia)>0 ORDER BY count(MPA.midia) DESC;"
+    try:
+        cur.execute(sql, [email])
+    except(Exception, psycopg2.DatabaseError) as error:
+        print(error)
+        print("select failed")
+        return
     res = cur.fetchall()
     for row in res:
         print(row)
@@ -80,8 +91,13 @@ def buscar():
     pais=input("digite o pais: ")
     nome=input("digite o nome: ")
     diretor=input("digite o nome do diretor: ")
-    sql="SELECT S.nome, FROM Streaming S JOIN MidiaLicenciada ML ON S.nome=ML.streaming JOIN Midia M ON M.id=ML.midia WHERE ML.pais=:varPais AND M.titulo=:varNomeMidia AND M.diretor=:varNomeDiretor;"
-    cur.execute(sql, varPais=pais.upper(), varNomeMidia=nome.upper(), varNomeDiretor=diretor.upper())
+    sql="SELECT S.nome, FROM Streaming S JOIN MidiaLicenciada ML ON S.nome=ML.streaming JOIN Midia M ON M.id=ML.midia WHERE ML.pais=%s AND M.titulo=:varNomeMidia AND M.diretor=%s;"
+    try:
+        cur.execute(sql, [pais.upper(), nome.upper(), diretor.upper()])
+    except(Exception, psycopg2.DatabaseError) as error:
+        print(error)
+        print("select failed")
+        return
     res = cur.fetchall()
     for row in res:
         print(row)
@@ -91,10 +107,11 @@ option=1
 
 while(option!=0):
     print("Opcoes: \n\t0-sair\n\t1-inserir\n\t2-buscar")
-    option=input("Escolha uma opcao: ")
+    option=int(input("Escolha uma opcao: "))
     if(option==1):
         inserir()
     elif(option==2):
         buscar()
 
 conn.close()
+print('Database connection closed.')

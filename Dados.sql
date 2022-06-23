@@ -38,7 +38,7 @@ INSERT INTO EstaEm (usuario, pais) VALUES ('ddevito@gmail.com', 'BRASIL');
 INSERT INTO EstaEm (usuario, pais) VALUES ('victor@lutes.com', 'BRASIL');
 INSERT INTO EstaEm (usuario, pais) VALUES ('john@doe.com', 'BRASIL');
 
-INSERT INTO Midia (id, titulo, diretor, data, descricao, tituloEstrangeiro, tipo) VALUES (1, 'IN BRUGES', 'MATRIN MCDOUNAGH', TO_DATE('2016/05/02 16:00:00', 'YYYY/MM/DD HH24:MI:SS'), 'MUITO BOM E ENGRACADO', 'NA MIRA DO CHEFE', 'FILME');
+INSERT INTO Midia (id, titulo, diretor, data, descricao, tituloEstrangeiro, tipo) VALUES (1, 'IN BRUGES', 'MARTIN MCDOUNAGH', TO_DATE('2016/05/02 16:00:00', 'YYYY/MM/DD HH24:MI:SS'), 'MUITO BOM E ENGRACADO', 'NA MIRA DO CHEFE', 'FILME');
 INSERT INTO Midia (id, titulo, diretor, data, descricao, tituloEstrangeiro, tipo) VALUES (2, 'BARRY', 'BILL HADER', TO_DATE('2016/05/02 16:00:00', 'YYYY/MM/DD HH24:MI:SS'), 'MUITO BOM E ENGRACADO', 'BARRY', 'SERIE');
 INSERT INTO Midia (id, titulo, diretor, data, descricao, tituloEstrangeiro, tipo) VALUES (3, 'IN THE MOOD FOR LOVE', 'WONG KAR WAI', TO_DATE('2016/05/02 16:00:00', 'YYYY/MM/DD HH24:MI:SS'), 'MUITO BOM E TRISTE', 'AMOR A FLOR DA PELE', 'FILME');
 INSERT INTO Midia (id, titulo, diretor, data, descricao, tituloEstrangeiro, tipo) VALUES (4, 'DR WHO', 'STEVEN MOFFAT', TO_DATE('2016/05/02 16:00:00', 'YYYY/MM/DD HH24:MI:SS'), 'MUITO BOM E SCIFI', 'DR WHO', 'SERIE');
