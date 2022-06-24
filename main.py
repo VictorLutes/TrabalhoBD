@@ -223,7 +223,7 @@ def usarScripts():
 option=1
 print("se a base de dados esta vazia ou voce quer reiniciar ela escolha 1 para carregar o esquema e os dados das scripts sql que criamos")
 while(option!=0):
-    print("Opcoes: \n\t0-sair\n\t1-apagar todas as tabelas\n\t2-carregar o esquema e os dados dos arquivos sql\n\t3-buscar pela plataforma com mais filmes ou series marcadas para assistir de um usuario\n\t4-buscar quais plataformas tem um filme ou serie em um pais\n\t5-listar todas as VPNs\n\t6-listar todas as midias\n\t7-inserir dados em uma tabela")
+    print("Opcoes: \n\t0-sair\n\t1-apagar todas as tabelas e recarregar dos arquivos sql de esquema e dados (se executar esse comando, execute o comando 2 em seguida)\n\t2-carregar o esquema e os dados dos arquivos sql\n\t3-buscar pela plataforma com mais filmes ou series marcadas para assistir de um usuario\n\t4-buscar quais plataformas tem um filme ou serie em um pais\n\t5-listar todas as VPNs\n\t6-listar todas as midias\n\t7-inserir dados em uma tabela")
     option=int(input("Escolha uma opcao: "))
     if(option==1):
         dropTables()
