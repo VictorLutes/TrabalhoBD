@@ -1,13 +1,23 @@
 #ler usuario, fazer uma busca ou insercao, retornar dados
 
-#senha TrabalhoBD1234
-
+DATABASE_URL= 'postgres://svjjcpvs:TB4uJi_Ak8DjOoG5OxzpMtA8Jf1qXYSw@jelani.db.elephantsql.com/svjjcpvs'
+import urllib.parse as up
 import psycopg2
 # conecta na base
+up.uses_netloc.append("postgres")
+url = up.urlparse(DATABASE_URL)
+
 try:
     # cria a conexao
     print('Connecting to the PostgreSQL database...')
-    conn = psycopg2.connect(host='localhost', database='postgres',user='postgres', password='TrabalhoBD1234')
+    #conn = psycopg2.connect(host='localhost', database='postgres',user='postgres', password='TrabalhoBD1234')
+    conn = psycopg2.connect(dbname='svjjcpvs',
+                            user='svjjcpvs',
+                            password='TB4uJi_Ak8DjOoG5OxzpMtA8Jf1qXYSw',
+                            host='jelani.db.elephantsql.com',
+                            port='5432'
+                            )
+
     cur = conn.cursor()
 
 except (Exception, psycopg2.DatabaseError) as error:
@@ -197,33 +207,37 @@ def buscarMidias():
         print(row)
 
 #dropa as tabelas e recria elas com os dados do esquema
-def usarScripts():
+def dropTables():
     cur.execute("SELECT table_schema,table_name FROM information_schema.tables WHERE table_schema = 'public' ORDER BY table_schema,table_name")
     rows = cur.fetchall()
     for row in rows:
         print("dropping table: ", row[1])
         cur.execute("drop table " + row[1] + " cascade")
+    conn.commit()
+
+def usarScripts():
     cur.execute(open("EsquemaPostgre.sql", "r").read())
     cur.execute(open("DadosPostgre.sql", "r").read())
     conn.commit()
 
-
 option=1
 print("se a base de dados esta vazia ou voce quer reiniciar ela escolha 1 para carregar o esquema e os dados das scripts sql que criamos")
 while(option!=0):
-    print("Opcoes: \n\t0-sair\n\t1-apagar todas as tabelas e recarregar o esquema e os dados dos arquivos sql\n\t2-buscar pela plataforma com mais filmes ou series marcadas para assistir de um usuario\n\t3-buscar quais plataformas tem um filme ou serie em um pais\n\t4-listar todas as VPNs\n\t5-listar todas as midias\n\t6-inserir dados em uma tabela")
+    print("Opcoes: \n\t0-sair\n\t1-apagar todas as tabelas\n\t2-carregar o esquema e os dados dos arquivos sql\n\t3-buscar pela plataforma com mais filmes ou series marcadas para assistir de um usuario\n\t4-buscar quais plataformas tem um filme ou serie em um pais\n\t5-listar todas as VPNs\n\t6-listar todas as midias\n\t7-inserir dados em uma tabela")
     option=int(input("Escolha uma opcao: "))
     if(option==1):
-        usarScripts()
+        dropTables()
     elif(option==2):
-        buscarMarcados()
+        usarScripts()
     elif(option==3):
-        buscarMidia()
+        buscarMarcados()
     elif(option==4):
-        buscarVPNs()
+        buscarMidia()
     elif(option==5):
-        buscarMidias()
+        buscarVPNs()
     elif(option==6):
+        buscarMidias()
+    elif(option==7):
         inserir()
 
 conn.close()
