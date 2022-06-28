@@ -43,12 +43,13 @@ SELECT M.titulo, M.diretor FROM
     Midia M JOIN ElencoFilme E ON E.filme=M.id WHERE E.nome=varNomeAtor;
 
 
-/*Mostrar as plataformas com mais shows que ele marcou para assistir:
-varUsuario="victor@lutes.com";*/
+/*Mostrar as plataformas com mais shows que ele marcou para assistir em um pais:
+varUsuario="victor@lutes.com";
+varPais;*/
 SELECT S.nome, count(MPA.midia) FROM Streaming S 
     JOIN MidiaLicenciada ML ON S.nome=ML.streaming 
     JOIN MarcaParaAssistir MPA ON MPA.midia=ML.midia 
-    WHERE MPA.usuario=varUsuario
+    WHERE MPA.usuario=varUsuario AND ML.pais=varPais
     GROUP BY S.nome HAVING count(MPA.midia)>0
     ORDER BY count(MPA.midia) DESC;
 

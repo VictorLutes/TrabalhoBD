@@ -138,12 +138,13 @@ def inserir():
     
 #faz um select pelas plataformas com mais midias que um usuario marcou para assistir
 def buscarMarcados():
-    print("Digite o email de um usuario para saber quantas midias que ele marcou para assistir tem em cada plataforma (se houver pelo menos uma)")
+    print("Digite o email de um usuario para saber quantas midias que ele marcou para assistir tem em cada plataforma (se houver pelo menos uma) em um determinado pais")
     email=input("digite um email: ")
+    pais=input("digite o pais: ")
     #estou selecionando o nome da streaming e o numero de midias licenciadas que ela tem que contem alguma midia que o usuario passado marcou para assistir
-    sql="SELECT S.nome, count(MPA.midia) FROM Streaming S JOIN MidiaLicenciada ML ON S.nome=ML.streaming JOIN MarcaParaAssistir MPA ON MPA.midia=ML.midia WHERE MPA.usuario = %s GROUP BY S.nome HAVING count(MPA.midia)>0 ORDER BY count(MPA.midia) DESC;"
+    sql="SELECT S.nome, count(MPA.midia) FROM Streaming S JOIN MidiaLicenciada ML ON S.nome=ML.streaming JOIN MarcaParaAssistir MPA ON MPA.midia=ML.midia WHERE MPA.usuario = %s AND ML.pais= %s GROUP BY S.nome HAVING count(MPA.midia)>0 ORDER BY count(MPA.midia) DESC;"
     try:
-        cur.execute(sql, [email])
+        cur.execute(sql, [email, pais.upper()])
     except(Exception, psycopg2.DatabaseError) as error:
         print(error)
         print("select failed")
@@ -224,7 +225,7 @@ def usarScripts():
 option=1
 print("se a base de dados esta vazia ou voce quer reiniciar ela escolha 1 para carregar o esquema e os dados das scripts sql que criamos")
 while(option!=0):
-    print("Opcoes: \n\t0-sair\n\t1-apagar todas as tabelas e recarregar dos arquivos sql de esquema e dados (se executar esse comando, execute o comando 2 em seguida)\n\t2-carregar o esquema e os dados dos arquivos sql\n\t3-buscar pela plataforma com mais filmes ou series marcadas para assistir de um usuario\n\t4-buscar quais plataformas tem um filme ou serie em um pais\n\t5-listar todas as VPNs\n\t6-listar todas as midias\n\t7-inserir dados em uma tabela")
+    print("Opcoes: \n\t0-sair\n\t1-apagar todas as tabelas e recarregar dos arquivos sql de esquema e dados (se executar esse comando, execute o comando 2 em seguida)\n\t2-carregar o esquema e os dados dos arquivos sql\n\t3-buscar pela plataforma com mais filmes ou series marcadas para assistir de um usuario em um pais\n\t4-buscar quais plataformas tem um filme ou serie em um pais\n\t5-listar todas as VPNs\n\t6-listar todas as midias\n\t7-inserir dados em uma tabela")
     option=int(input("Escolha uma opcao: "))
     if(option==1):
         dropTables()
