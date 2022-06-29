@@ -1,26 +1,3 @@
-/*
-Ideias de buscas:
-
-Ideias simples:
-all shows in my country
-All shows on a platform
-Movies/shows a user has watched
-Movies/shows to watch 
-
-Ideias complexas:
-Filtrar por genero e por linguagem
-Se episodio x da temporada y esta nas plataformas que o usuario assina
-Todas as plataformas com o episodio x da temporada y
-selecionar todas as plataformas que tem um filme num determinado pais
-All shows a user can watch (his platforms+country)
-Mostrar a plataforma com mais shows que ele marcou para assistir
-Mostrar o pais com mais shows que ele ja assistiu
-Mostrar o genero com mais shows que ele ja assistiu
-Buscar por shows com um ator
-Buscar qual usuario mais assistiu algum genero/plataforma/nroMidias
-*/
-
-
 /*Filtrar por genero:*/
 SELECT M.titulo, M.diretor FROM
     Midia M JOIN Genero G ON G.midia=M.id WHERE G.nomeGenero='genero buscado';
@@ -49,7 +26,7 @@ SELECT S.nome, count(MPA.midia) FROM Streaming S
     ORDER BY count(MPA.midia) DESC;
 
 
-/*selecionar todas as plataformas que tem um filme num determinado pais:*/
+/*selecionar todas as plataformas que tem um filme ou serie num determinado pais:*/
 SELECT S.nome FROM Streaming S 
     JOIN MidiaLicenciada ML ON S.nome=ML.streaming 
     JOIN Midia M ON M.id=ML.midia 
