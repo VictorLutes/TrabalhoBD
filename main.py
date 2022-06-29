@@ -27,7 +27,6 @@ except (Exception, psycopg2.DatabaseError) as error:
 #funcao para inserir dados na tabela
 def inserir():
     print("Tabelas: 1-VPN, 2-Streaming, 3-Pais, 4-Usuario, 5-Midia (e Filme ou Serie)")
-    #10-Photo, 11-Genero, 12-MidiaLicenciada,  13-MarcaParaAssistir, 14-Visto, 15-Filme, 16-ElencoFilme, 17-DubLegFilme, 19-Serie, 20-Episodio, 21-ElencoEpisodio, 22-DubLegEpisodio")
     tabela=int(input("digite o numero da tabela que voce quer inserir: "))
     if(tabela==1):#insere em VPN
         nome=input("digite o nome da VPN: ")
@@ -207,7 +206,7 @@ def buscarMidias():
         print("\t", end='')
         print(row)
 
-#dropa as tabelas e recria elas com os dados do esquema
+#dropa as tabelas e recria elas com o EsquemaPostgre.sql e os dados em DadosPostgre.sql
 def dropTables():
     cur.execute("SELECT table_schema,table_name FROM information_schema.tables WHERE table_schema = 'public' ORDER BY table_schema,table_name")
     rows = cur.fetchall()
@@ -216,8 +215,6 @@ def dropTables():
             print("dropping table: ", row[1])
             cur.execute("drop table " + row[1] + " cascade")
     conn.commit()
-
-def usarScripts():
     cur.execute(open("EsquemaPostgre.sql", "r").read())
     cur.execute(open("DadosPostgre.sql", "r").read())
     conn.commit()
@@ -225,21 +222,19 @@ def usarScripts():
 option=1
 print("se a base de dados esta vazia ou voce quer reiniciar ela escolha 1 para carregar o esquema e os dados das scripts sql que criamos")
 while(option!=0):
-    print("Opcoes: \n\t0-sair\n\t1-apagar todas as tabelas e recarregar dos arquivos sql de esquema e dados (se executar esse comando, execute o comando 2 em seguida)\n\t2-carregar o esquema e os dados dos arquivos sql\n\t3-buscar pela plataforma com mais filmes ou series marcadas para assistir de um usuario em um pais\n\t4-buscar quais plataformas tem um filme ou serie em um pais\n\t5-listar todas as VPNs\n\t6-listar todas as midias\n\t7-inserir dados em uma tabela")
+    print("Opcoes: \n\t0-sair\n\t1-apagar todas as tabelas e recarregar o esquema e os dados dos arquivos sql\n\t2-buscar pela plataforma com mais filmes ou series marcadas para assistir de um usuario em um pais\n\t3-buscar quais plataformas tem um filme ou serie em um pais\n\t4-listar todas as VPNs\n\t5-listar todas as midias\n\t6-inserir dados em uma tabela")
     option=int(input("Escolha uma opcao: "))
     if(option==1):
         dropTables()
     elif(option==2):
-        usarScripts()
-    elif(option==3):
         buscarMarcados()
-    elif(option==4):
+    elif(option==3):
         buscarMidia()
-    elif(option==5):
+    elif(option==4):
         buscarVPNs()
-    elif(option==6):
+    elif(option==5):
         buscarMidias()
-    elif(option==7):
+    elif(option==6):
         inserir()
 
 conn.close()
