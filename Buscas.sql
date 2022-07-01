@@ -43,3 +43,13 @@ SELECT usuario, COUNT(midiaLicenciada) as nroMidia
     FROM Visto 
     GROUP BY usuario
     ORDER BY nroMidia DESC;
+
+
+
+/*Mostrar as plataformas todos os shows que um usuario marcou para assistir:*/
+/*se for testar no Postgre usar EXCEPT ao inves de MINUS*/
+SELECT S.nome FROM Streaming S
+    WHERE NOT EXISTS(\
+        (SELECT MPA.midia FROM MarcaParaAssistir MPA WHERE MPA.usuario='')
+        MINUS
+        (SELECT ML.midia FROM MidiaLicenciada ML WHERE S.nome = ML.streaming));
