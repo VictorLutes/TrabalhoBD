@@ -53,3 +53,18 @@ SELECT S.nome FROM Streaming S
         (SELECT MPA.midia FROM MarcaParaAssistir MPA WHERE MPA.usuario='')
         MINUS
         (SELECT ML.midia FROM MidiaLicenciada ML WHERE S.nome = ML.streaming));
+
+-- Buscar qual usuario mais assistiu algum genero
+SELECT usuario, COUNT(midiaLicenciada) as nroMidia 
+    FROM Visto 
+    JOIN Genero G ON G.midia=Visto.midiaLicenciada on G.nomeGenero='genero buscado'
+    GROUP BY usuario ON 
+    ORDER BY nroMidia DESC
+    LIMIT 1;
+-- Buscar qual usuario mais assistiu alguma plataforma
+SELECT usuario, COUNT(midiaLicenciada) as nroMidia 
+    FROM Visto 
+    JOIN Streaming S ON S.nome=Visto.midiaLicenciada on S.nome='plataforma buscada'
+    GROUP BY usuario ON 
+    ORDER BY nroMidia DESC
+    LIMIT 1;
