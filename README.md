@@ -8,4 +8,4 @@ Execute o codigo com o comando: python3 main.py
 
 
 
-![Presentation]([https://github.com/VictorLutes/DesafioAlfa/blob/main/page.png](https://github.com/VictorLutes/TrabalhoBD/blob/main/Reposit%C3%B3rioDeStreaming.pdf)https://github.com/VictorLutes/TrabalhoBD/blob/main/Reposit%C3%B3rioDeStreaming.pdf)
+![Presentation](https://github.com/VictorLutes/TrabalhoBD/blob/main/Reposit%C3%B3rioDeStreaming.pdf)
