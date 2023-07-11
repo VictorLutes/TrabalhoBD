@@ -1,4 +1,4 @@
-Aplication to insert data and make relevant searches in a database containing information about the availability of movies and tv shows across diferent streamin platforms.
+Aplication to insert data and make relevant searches in an online database containing information about the availability of movies and tv shows across different streaming platforms.
 
 Execute the program with: python3 main.py
 
